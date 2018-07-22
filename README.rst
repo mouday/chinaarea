@@ -20,6 +20,35 @@
 
     pip install chinaarea
 
+pypi地址
+========
+
+https://pypi.org/project/chinaarea/
+
+项目结构
+========
+
+::
+
+    chinaarea/
+        │  chinaarea.py              # 项目主文件
+        │  README.md                 # 说明文件
+        │  scrapy.cfg                # scrapy配置文件
+        │  __init__.py
+        │
+        └─stats_spider/             # 抓取数据的scrapy爬虫文件
+            │  china_area.sqlite    # 数据保存的sqlite数据库文件
+            │  items.py
+            │  middlewares.py
+            │  models.py
+            │  pipelines.py
+            │  settings.py
+            │  __init__.py
+            │
+            ├─spiders/             # 抓取数据的爬虫
+                   area_spider.py
+                   __init__.py
+
 代码示例
 ========
 
@@ -63,3 +92,11 @@
     # 判断是是否是县/区名
     >>> ca.is_county("南开区")
     >>> True
+
+    # 显示所有省份，城市，县/区
+    for province in ca.get_provinces():
+        print("### %s ###" % province)
+        for city in ca.get_cities(province):
+            print("# %s" % city)
+            for county in ca.get_counties(city):
+                print("* %s" % county)

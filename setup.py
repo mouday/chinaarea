@@ -21,14 +21,14 @@ if os.path.exists('README.rst'):
 
 setuptools.setup(
     name="chinaarea",
-    version="0.0.2",
+    version="0.0.4",
     author="Peng Shiyu",
     license = 'MIT License',
     author_email="pengshiyuyx@gmail.com",
     description="get a china area by province, city or county",
     long_description=long_description,
     long_description_content_type="text/x-rst",
-    url="https://github.com/mouday/chianarea",
+    url="https://github.com/mouday/chinaarea",
     packages=setuptools.find_packages(),
     classifiers=(
         "Programming Language :: Python :: 3",
@@ -41,3 +41,12 @@ setuptools.setup(
             'chinaarea': ['stats_spider/*.sqlite']
     },
 )
+
+"""
+打包上传指令：
+python setup.py sdist bdist_wheel
+
+twine upload dist/*
+
+tree /F > tree.txt
+"""
