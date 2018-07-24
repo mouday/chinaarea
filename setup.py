@@ -21,7 +21,7 @@ if os.path.exists('README.rst'):
 
 setuptools.setup(
     name="chinaarea",
-    version="0.0.4",
+    version="0.0.5",
     author="Peng Shiyu",
     license = 'MIT License',
     author_email="pengshiyuyx@gmail.com",
@@ -35,7 +35,7 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ),
-    install_requires = ["peewee==3.3.4"],        # 常用
+    install_requires = ["peewee==3.3.4", "jieba==0.39"],        # 常用
     package_data = {
             # If any package contains *.txt or *.rst files, include them:
             'chinaarea': ['stats_spider/*.sqlite']

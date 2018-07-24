@@ -49,6 +49,10 @@ class ChinaCountyModel(BaseModel):
         db_table = 'china_county'
 
 
+# ======================
+#  对数据库记录进行优化操作
+# ======================
+
 tables = [ChinaProvinceModel, ChinaCityModel, ChinaCountyModel]
 
 for table in tables:
@@ -66,8 +70,47 @@ def change_city():
         print(city.province.name)
 
 
+def change_city2():
+    cities = ChinaCityModel.filter((ChinaCityModel.name == "省直辖县级行政区划") |
+                                   (ChinaCityModel.name == "自治区直辖县级行政区划"))
+    for city in cities:
+        name = "{}{}".format(city.province.name, "直辖县")
+        print(name)
+        ChinaCityModel.update(name=name).where(ChinaCityModel.id == city.id).execute()
+
+
+def _check_city(self):
+    """
+    检查城市名中重复名称
+    :return: None
+    """
+    cities = ChinaCityModel.select()
+    cities = [city.name for city in cities]
+    print(len(cities))
+    print(len(set(cities)))
+    for city in set(cities):
+        cities.remove(city)
+    print(cities)
+
+
+def _check_county(self):
+    """
+    检查县/区名中重复名称
+    :return: None
+    """
+    counties = ChinaCountyModel.select()
+    counties = [county.name for county in counties]
+    print(len(counties))
+    print(len(set(counties)))
+    for county in set(counties):
+        counties.remove(county)
+    print(counties)
+
+
 if __name__ == '__main__':
-    province = ChinaProvinceModel.filter(ChinaProvinceModel.name == "山西省").first()
-    for city in province.cities:
-        print(city.name)
+    # province = ChinaProvinceModel.filter(ChinaProvinceModel.name == "山西省").first()
+    # for city in province.cities:
+    #     print(city.name)
+    change_city2()
+
 
